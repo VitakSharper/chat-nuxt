@@ -5,7 +5,7 @@
     align-center
   >
     <v-flex xs12 sm8>
-      <v-card>
+      <v-card min-width="400">
         <v-card-title>
           <h1>NUXT CHAT</h1>
         </v-card-title>
@@ -43,13 +43,18 @@
 </template>
 
 <script>
+  import {mapMutations} from 'vuex'
+
   export default {
+    layout: "empty",
+    head:{
+      title:'Bienvenue dans NUXT CHAT'
+    },
     sockets: {
       connect: function () {
         console.log("Socket connected")
       }
     },
-    layout: "empty",
     data: () => ({
       valid: true,
       name: '',
@@ -62,6 +67,7 @@
     }),
 
     methods: {
+      ...mapMutations(['setUser']),
       message() {
         this.$socket.emit('createMessage', {
           text: 'FROM CLIENT'
@@ -69,6 +75,12 @@
       },
       submit() {
         if (this.$refs.form.validate()) {
+          const user = {
+            name: this.name,
+            room: this.room
+          };
+          this.setUser(user);
+          this.$router.push("/chat");
         }
       },
     }

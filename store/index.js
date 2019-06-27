@@ -1,4 +1,14 @@
-export const state = () => ({})
+export const state = () => ({
+  user: {}
+
+});
+
+export const mutations = {
+  setUser(state, user) {
+    state.user = user;
+    console.log('Mutations User: ', state.user)
+  }
+};
 
 export const actions = {
   SOCKET_newMessage(context, data) {
