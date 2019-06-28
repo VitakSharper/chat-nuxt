@@ -1,48 +1,48 @@
 <template>
-  <v-app app dark>
-    <v-navigation-drawer app v-model="drawer">
-      <v-list subheader>
-        <v-subheader>Liste des utilisateurs actives</v-subheader>
-        <v-list-tile
-          v-for="u in users"
-          :key="u.id"
-          @click.prevent=""
-        >
-          <v-list-tile-content>
-            <v-list-tile-title>{{u.name}}</v-list-tile-title>
-          </v-list-tile-content>
+    <v-app app dark>
+        <v-navigation-drawer app v-model="drawer" mobile-break-point="650px">
+            <v-list subheader>
+                <v-subheader>Liste des utilisateurs actives</v-subheader>
+                <v-list-tile
+                        v-for="u in users"
+                        :key="u.id"
+                        @click.prevent=""
+                >
+                    <v-list-tile-content>
+                        <v-list-tile-title>{{u.name}}</v-list-tile-title>
+                    </v-list-tile-content>
 
-          <v-list-tile-action>
-            <v-icon :color="u.id ===2? 'teal' : 'grey'">chat_bubble</v-icon>
-          </v-list-tile-action>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <v-toolbar app>
-      <v-toolbar-side-icon @click="drawer=!drawer"></v-toolbar-side-icon>
-      <v-btn icon @click="exit">
-        <v-icon>arrow_back</v-icon>
+                    <v-list-tile-action>
+                        <v-icon :color="u.id ===2? 'teal' : 'grey'">chat_bubble</v-icon>
+                    </v-list-tile-action>
+                </v-list-tile>
+            </v-list>
+        </v-navigation-drawer>
+        <v-toolbar app>
+            <v-toolbar-side-icon @click="drawer=!drawer"></v-toolbar-side-icon>
+            <v-btn icon @click="exit">
+                <v-icon>arrow_back</v-icon>
 
-      </v-btn>
-      <v-toolbar-title>Chat de la chambre {{user.room}}</v-toolbar-title>
-    </v-toolbar>
-    <v-content>
-      <div fluid>
-        <nuxt/>
-      </div>
-    </v-content>
-  </v-app>
+            </v-btn>
+            <v-toolbar-title>Chambre: {{user.room}}</v-toolbar-title>
+        </v-toolbar>
+        <v-content>
+            <div class="chatChamber">
+                <nuxt/>
+            </div>
+        </v-content>
+    </v-app>
 </template>
 
 <script>
-  import {mapState, mapMutations} from 'vuex'
+  import { mapState, mapMutations } from 'vuex'
 
   export default {
     data: () => ({
       drawer: true,
       users: [
-        {id: 1, name: 'Vitak'},
-        {id: 2, name: 'Liuda'},
+        { id: 1, name: 'Vitak' },
+        { id: 2, name: 'Liuda' }
       ]
     }),
     computed: {
@@ -58,3 +58,9 @@
     }
   }
 </script>
+<style scoped>
+    .chatChamber {
+        height: 100%
+    }
+
+</style>

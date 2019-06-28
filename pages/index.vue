@@ -82,7 +82,7 @@
 
           this.$socket.emit('userJoined', user, (data) => {
             if (typeof data === 'string') {
-              console.error(data)
+              console.error('userJoined from index.vue: ',data)
             } else {
               user.id = data.userId;
               this.setUser(user);
