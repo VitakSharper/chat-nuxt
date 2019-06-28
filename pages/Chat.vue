@@ -9,7 +9,7 @@
             />
         </div>
         <div class="c-form">
-            <app-chat-form></app-chat-form>
+            <app-chat-form/>
         </div>
     </div>
 </template>

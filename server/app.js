@@ -13,7 +13,7 @@ io.on('connection', socket => {
     socket.join(data.room)
     cb({ userId: socket.id })
     socket.emit('newMessage', m('admin', `Bienvenue ${data.name}`))
-    socket.emit('newMessage', m('NotAdmin', `Some test message for: ${data.name}`)) // test message
+    socket.emit('newMessage', m('NotAdmin', `Bonjour ${data.name} comment ça va?`)) // test message
     socket.broadcast
       .to(data.room)
       .emit('newMessage', m('admin', `L'utilisateur ${data.name} est connectée.`))
