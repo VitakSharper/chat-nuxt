@@ -8,17 +8,21 @@
                     owner
             />
         </div>
-        <div class="c-form"></div>
+        <div class="c-form">
+            <app-chat-form></app-chat-form>
+        </div>
     </div>
 </template>
 
 <script>
   import { mapState } from 'vuex'
   import Message from '../components/Message.vue'
+  import ChatForm from '../components/ChatForm.vue'
 
   export default {
     components: {
-      appMessage: Message
+      appMessage: Message,
+      appChatForm: ChatForm
     },
     middleware: ['chat'],
     head() {
