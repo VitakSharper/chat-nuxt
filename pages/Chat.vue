@@ -1,6 +1,6 @@
 <template>
   <div class="c-wrap">
-    <div class="c-chat">
+    <div class="c-chat" ref="block">
       <app-message
         v-for="m in messages" :key="m.text"
         :name="m.name"
@@ -25,12 +25,20 @@
       appChatForm: ChatForm
     },
     middleware: ['chat'],
+    layout: "main",
     head() {
       return {
         title: `Chambre ${this.user.room}`
       }
     },
-    computed: mapState(['user', 'messages'])
+    computed: mapState(['user', 'messages']),
+    watch: {
+      messages() {
+        this.$nextTick(() => {
+          this.$refs.block.scrollTop = this.$refs.block.scrollHeight;
+        })
+      }
+    }
 
   }
 </script>

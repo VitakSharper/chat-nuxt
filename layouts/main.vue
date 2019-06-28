@@ -1,4 +1,5 @@
 <template>
+  <!--Default Markup from Vuetify site-->
   <v-app app dark>
     <v-navigation-drawer app v-model="drawer" mobile-break-point="650px">
       <v-list subheader>

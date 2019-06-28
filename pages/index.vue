@@ -6,6 +6,22 @@
   >
     <v-flex xs12 sm8>
       <v-card min-width="400">
+        <!--SNACKBAR-->
+        <v-snackbar
+          v-model="snackbar"
+          :timeout="6000"
+          top
+        >
+          {{ message }}
+          <v-btn
+            color="pink"
+            flat
+            @click="snackbar = false"
+          >
+            Fermer
+          </v-btn>
+        </v-snackbar>
+
         <v-card-title>
           <h1>NUXT CHAT</h1>
         </v-card-title>
@@ -57,6 +73,8 @@
     },
     data: () => ({
       valid: true,
+      snackbar: false,
+      message: '',
       name: '',
       nameRules: [
         v => !!v || 'Le nom est requis',
@@ -65,7 +83,16 @@
       room: '',
       roomRules: [v => !!v || 'Chambre est requis']
     }),
+    mounted() {
+      const {message} = this.$route.query;
+      if (message === 'noUser') {
+        this.message = "Connecter vous."
+      } else if (message === 'leftChat') {
+        this.message = "Vous avez quittez la conversation."
+      }
+      this.snackbar = !!this.message;
 
+    },
     methods: {
       ...mapMutations(['setUser']),
       message() {
@@ -82,7 +109,7 @@
 
           this.$socket.emit('userJoined', user, (data) => {
             if (typeof data === 'string') {
-              console.error('userJoined from index.vue: ',data)
+              console.error('userJoined from index.vue: ', data)
             } else {
               user.id = data.userId;
               this.setUser(user);
